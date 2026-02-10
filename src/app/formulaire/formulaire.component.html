@@ -1,3 +1,4 @@
+
 <div>
   <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)"> 
     <fieldset>
@@ -67,6 +68,30 @@
       </label>
 
     </fieldset>
+    <fieldset>
+  <legend>Pitch Personnel</legend>
+  <textarea
+    name="bio"
+    minlength="20"
+    maxlength="200"
+    [(ngModel)]="myText"
+    #bio="ngModel"
+    placeholder="Pourquoi vous ?"
+    [ngClass]="{valid: bio.valid && bio.touched,invalid: bio.invalid && bio.touched}"
+    required
+  ></textarea>
+
+  <div
+    class="compteur"
+    [ngClass]="{ danger: (myText?.length || 0) > 180 }"
+  >
+    {{ myText?.length || 0 }} / 200 caractères
+  </div>
+
+  @if (bio.invalid && bio.touched) {
+    <small>Bio entre 20 et 200 caractères</small>
+  }
+</fieldset>
   </form>
 </div>
 
@@ -75,9 +100,7 @@
     <p><span>Nom: </span>{{user.name}}</p>
     <p><span>Email: </span>{{user.email}}</p>
     <p><span>Niveau: </span>{{user.selectedPost}}</p>
-    <!-- <p><span>Contrat: </span>{{user.contrat}}</p>
+    <p><span>Contrat: </span>{{user.contrat}}</p>
     <p><span>Disponible: </span>{{user.disponible}}</p>
-    <p><span>Bio: </span>{{user.bio}}</p> -->
-    <p>Contract: <span>{{condidate.preferences.contract}}</span></p>
-    <p>Disponible: <span>{{condidate.preferences.avaible ? "Oui" : "Non"}}</span></p>
+    <p><span>Bio: </span>{{user.bio}}</p>
 </div>
