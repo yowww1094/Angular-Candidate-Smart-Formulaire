@@ -28,12 +28,12 @@ export class FormulaireComponent {
     { value: '3', label: 'Senior' },
     { value: '4', label: 'Lead' }
   ];
-  condidadte = {
+  condidate = {
     name:"",
     email:"",
     level:"",
     bio:"",
-    references:{
+    preferences:{
       contract:"CDI",
       avaible:false
     }
@@ -42,7 +42,7 @@ export class FormulaireComponent {
   onSubmit(form:any){
     console.log(form.value);
     if(form.valid){
-      console.log(this.condidadte)
+      console.log(this.condidate)
       form.resetForm({
         preferences:{
           contract:"CDI",
