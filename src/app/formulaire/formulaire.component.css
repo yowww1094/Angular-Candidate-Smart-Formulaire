@@ -87,6 +87,7 @@ select {
 
 
 .card{
+  display: block;
     border: 1px solid grey;
     border-radius: 10px;
     padding: 15px 20px;
@@ -118,3 +119,30 @@ button{
 button:hover{
   background-color: #338dee;
 }
+
+fieldset[ngModelGroup] {
+  margin-top: 25px;
+  padding-top: 10px;
+}
+
+fieldset[ngModelGroup] legend {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+fieldset[ngModelGroup] label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+fieldset[ngModelGroup] input[type="radio"],
+fieldset[ngModelGroup] input[type="checkbox"] {
+  accent-color: #007bff; /* Angular-friendly, no logic */
+  cursor: pointer;
+}
+

@@ -1,4 +1,4 @@
-
+<!-- 
 <div>
   <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)"> 
     <fieldset>
@@ -55,6 +55,20 @@
 
     </fieldset>
 
+    <fieldset ngModelGroup="preference">
+      <legend> Preference de mission </legend>
+        <label for="">
+          <input type="radio" name="contract" id="" value="CDI" [(ngModel)]="user.preferences.contract">CDI 
+        </label>
+        <label for="">
+          <input type="radio" name="contract" id="" value="Freelace"  [(ngModel)] = "user.preferences.contract">Freelance 
+        </label>
+        <label>
+          <input type="checkbox" name="avaible" [(ngModel)]="user.preferences.avaible">
+          Disponible immédiatement
+      </label>
+
+    </fieldset>
     <fieldset>
       <legend>Pitch Personnel</legend>
       <textarea
@@ -71,9 +85,9 @@
 
       <div
         class="compteur"
-        [ngClass]="{ danger: (myText?.length || 0) > 180 }"
+        [ngClass]="{ danger: (user.bio.length) > 180 }"
       >
-        {{ myText?.length || 0 }} / 200 caractères
+        {{ user.bio.length }} / 200 caractères
       </div>
 
       @if (bio.invalid && bio.touched) {
@@ -87,10 +101,97 @@
 
 <div class="card">
     <h1>Carte Candidat</h1>
-    <p><span>Nom: </span>{{user.name}}</p>
-    <p><span>Email: </span>{{user.email}}</p>
-    <p><span>Niveau: </span>{{user.selectedPost}}</p>
-    <p><span>Contrat: </span>{{user.type}}</p>
-    <p><span>Disponible: </span>{{user.disponibilite}}</p>
-    <p><span>Bio: </span>{{user.bio}}</p>
+    <p><span>Nom: </span>{{isSubmited ? submitedUser.name : user.name}}</p>
+    <p><span>Email: </span>{{isSubmited ? submitedUser.email : user.email}}</p>
+    <p><span>Niveau: </span>{{isSubmited ? submitedUser.selectedPost : user.selectedPost}}</p>
+    <p><span>Contrat: </span>{{isSubmited ? submitedUser.preferences.contract : user.preferences.contract}}</p>
+    <p><span>Disponible: </span>{{isSubmited ? (submitedUser.preferences.contract ? 'Oui':'Non') : (user.preferences.contract ? 'Oui':'Non')}}</p>
+    <p><span>Bio: </span>{{isSubmited ? submitedUser.bio : user.bio}}</p>
+</div> -->
+
+
+<form #f="ngForm" (ngSubmit)="submit(f)" class="container">
+
+  <!-- FORM -->
+  <fieldset>
+    <legend>Identité</legend>
+
+    <input name="name" required minlength="3"
+      class="form-control"
+      [(ngModel)]="candidate.name"
+      #name="ngModel"
+      placeholder="Nom complet"
+      minlength="5"
+      [ngClass]="{ valid: name.valid, invalid: name.touched && name.invalid }" />
+
+    <input name="email" required email
+    class="form-control"
+      [(ngModel)]="candidate.email"
+      #email="ngModel"
+      placeholder="Email"
+      [ngClass]="{ valid: email.valid, invalid: email.touched && email.invalid }" />
+
+    <select name="level" required
+      [(ngModel)]="candidate.level"
+      #level="ngModel">
+      <option value="">-- Niveau --</option>
+      <option *ngFor="let post of posts" [value]="post.label">
+          {{ post.label }}
+        </option>
+    </select>
+  </fieldset>
+
+  <fieldset ngModelGroup="preferences">
+    <legend>Préférences</legend>
+
+    <label>
+      <input type="radio" name="contract" value="CDI"
+        [(ngModel)]="candidate.preferences.contract" />
+      CDI
+    </label>
+
+    <label>
+      <input type="radio" name="contract" value="Freelance"
+        [(ngModel)]="candidate.preferences.contract" />
+      Freelance
+    </label>
+
+    <label>
+      <input type="checkbox" name="available"
+        [(ngModel)]="candidate.preferences.available" />
+      Disponible immédiatement
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Pitch personnel</legend>
+
+    <textarea name="bio" required minlength="20" maxlength="200" class="form-control"
+      [(ngModel)]="candidate.bio"
+      #bio="ngModel"></textarea>
+
+    <p [ngClass]="{ danger: candidate.bio.length > 180 }">
+      {{ candidate.bio.length }}/200
+    </p>
+  </fieldset>
+
+  <button type="submit" [disabled]="f.invalid">
+    Envoyer
+  </button>
+</form>
+
+<div class="card">
+  <h1>Carte Candidat</h1>
+  <p><span>Name: </span>{{ submittedCandidate?.name || candidate.name }}</p>
+  <p><span>Email: </span>{{ submittedCandidate?.email || candidate.email }}</p>
+  <p><span>Niveau: </span>{{ submittedCandidate?.level || candidate.level }}</p>
+  <p><span>Contrat: </span>{{ submittedCandidate?.preferences.contract || candidate.preferences.contract }}</p>
+  <p>
+    <span>Disponibilite: </span>
+    {{
+      (submittedCandidate?.preferences.available ?? candidate.preferences.available)
+        ? 'Oui' : 'Non'
+    }}
+  </p>
+  <p><span>Bio: </span>{{ submittedCandidate?.bio || candidate.bio }}</p>
 </div>
