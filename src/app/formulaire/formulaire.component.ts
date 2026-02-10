@@ -8,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './formulaire.component.css'
 })
 export class FormulaireComponent {
+  
+ myText: string = '';
+  
 
 }

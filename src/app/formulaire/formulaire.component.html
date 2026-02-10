@@ -1,1 +1,24 @@
-<p>formulaire works!</p>
+<fieldset>
+  <legend>Pitch Personnel</legend>
+  <textarea
+    name="bio"
+    minlength="20"
+    maxlength="200"
+    [(ngModel)]="myText"
+    #bio="ngModel"
+    placeholder="Pourquoi vous ?"
+    [ngClass]="{valid: bio.valid && bio.touched,invalid: bio.invalid && bio.touched}"
+    required
+  ></textarea>
+
+  <div
+    class="compteur"
+    [ngClass]="{ danger: (myText?.length || 0) > 180 }"
+  >
+    {{ myText?.length || 0 }} / 200 caractères
+  </div>
+
+  @if (bio.invalid && bio.touched) {
+    <small>Bio entre 20 et 200 caractères</small>
+  }
+</fieldset>

@@ -1,0 +1,29 @@
+textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 8px;
+  border-left: 5px solid #ccc;
+}
+
+
+.valid {
+  border-left-color: green;
+}
+
+.invalid {
+  border-left-color: red;
+}
+
+
+.compteur {
+  text-align: right;
+}
+
+.counter.danger {
+  color: red;
+}
+
+small {
+  color: red;
+}
