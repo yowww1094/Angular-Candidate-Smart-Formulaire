@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -11,12 +11,16 @@ import { CommonModule } from '@angular/common';
 })
 export class FormulaireComponent {
 
+  @Output() userChange = new EventEmitter<any>();
+
   user = {
     name: '',
-    email: ''
+    email: '',
+    selectedPost: '',
+    type: '',
+    disponibilite: '',
+    bio: ''
   };
-
-  selectedPost = '';
 
   posts = [
     { value: '1', label: 'Junior' },
