@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -7,11 +8,32 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule,CommonModule],
   templateUrl: './formulaire.component.html',
-  styleUrl: './formulaire.component.css'
+  styleUrls: ['./formulaire.component.css']
 })
 export class FormulaireComponent {
   
  myText: string = '';
   
 
+  @Output() userChange = new EventEmitter<any>();
+
+  user = {
+    name: '',
+    email: '',
+    selectedPost: '',
+    type: '',
+    disponibilite: '',
+    bio: ''
+  };
+
+  posts = [
+    { value: '1', label: 'Junior' },
+    { value: '2', label: 'Confirmé' },
+    { value: '3', label: 'Senior' },
+    { value: '4', label: 'Lead' }
+  ];
+
+  onSubmit(form:any){
+    console.log(form.value);
+  }
 }
