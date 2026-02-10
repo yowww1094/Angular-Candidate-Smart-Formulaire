@@ -1,1 +1,57 @@
-<p>formulaire works!</p>
+<div>
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+    <fieldset>
+      <legend>Identité du Candidat</legend>
+
+      <input
+        type="text"
+        id="name"
+        class="form-control"
+        name="name"
+        placeholder="Nom complet"
+        [(ngModel)]="user.name"
+        required
+        minlength="5"
+        #nameRef="ngModel"
+      />
+
+      <div class="error" *ngIf="nameRef.invalid && nameRef.touched">
+        <div *ngIf="nameRef.errors?.['required']">
+          Nom obligatoire.
+        </div>
+        <div *ngIf="nameRef.errors?.['minlength']">
+          Minimum 5 caractères.
+        </div>
+      </div>
+
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="form-control"
+        placeholder="Email professionnel"
+        [(ngModel)]="user.email"
+        required
+        email
+        #emailRef="ngModel"
+      />
+
+      <div class="error" *ngIf="emailRef.invalid && emailRef.touched">
+        <div *ngIf="emailRef.errors?.['required']">
+          L'email est obligatoire.
+        </div>
+        <div *ngIf="emailRef.errors?.['email']">
+          Format d'email invalide.
+        </div>
+      </div>
+
+      <select name="post" [(ngModel)]="selectedPost">
+        <option value="">-- Sélectionnez --</option>
+        <option *ngFor="let post of posts" [value]="post.value">
+          {{ post.label }}
+        </option>
+      </select>
+
+    </fieldset>
+  </form>
+</div>
