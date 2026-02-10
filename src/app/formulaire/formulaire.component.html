@@ -54,6 +54,20 @@
       </select>
 
     </fieldset>
+    <fieldset ngModelGroup="preference">
+      <legend> Preference de mission </legend>
+        <label for="">
+          <input type="radio" name="contract" id="" value="CDI" [(ngModel)]="condidate.preferences.contract">CDI 
+        </label>
+        <label for="">
+          <input type="radio" name="contract" id="" value="Freelace"  [(ngModel)] = "condidate.preferences.contract">Freelance 
+        </label>
+        <label>
+          <input type="checkbox" name="avaible" [(ngModel)]="condidate.preferences.avaible">
+          Disponible immédiatement
+      </label>
+
+    </fieldset>
     <fieldset>
   <legend>Pitch Personnel</legend>
   <textarea

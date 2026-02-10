@@ -32,8 +32,27 @@ export class FormulaireComponent {
     { value: '3', label: 'Senior' },
     { value: '4', label: 'Lead' }
   ];
-
+  condidate = {
+    name:"",
+    email:"",
+    level:"",
+    bio:"",
+    preferences:{
+      contract:"CDI",
+      avaible:false
+    }
+  }
+  
   onSubmit(form:any){
     console.log(form.value);
+    if(form.valid){
+      console.log(this.condidate)
+      form.resetForm({
+        preferences:{
+          contract:"CDI",
+          avaible:false
+        }
+      })
+    }
   }
 }
